@@ -48,11 +48,9 @@ const likeCard = (req, res) => {
   )
     .then((card) => {
       if (!card) {
-        return res
-          .status(404)
-          .send({
-            message: "Переданы некорректные данные для добавления лайка",
-          });
+        return res.status(404).send({
+          message: "Переданы некорректные данные для добавления лайка",
+        });
       }
       return res.send(card);
     })
