@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 const Cards = require('../models/Card');
 
 const getCards = (req, res) => {
