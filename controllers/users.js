@@ -8,7 +8,7 @@ const AuthError = require('../errors/AuthError');
 // eslint-disable-next-line import/no-unresolved
 const User = require('../models/User');
 
-const getUsers = (_, res, next) => {
+const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
       res.status(200).send(users);
@@ -62,7 +62,7 @@ const createUser = (req, res, next) => {
 
 const updateProfile = (req, res, next) => {
   const { name, about } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name, about }, { runValidators: true })
+  User.findByIdAndUpdate(req.user._id, { name, about }, { runValidators: true, new: true })
     .then((user) => {
       if (!user) {
         return next(new NotFound('Пользователь не найден'));
@@ -80,7 +80,7 @@ const updateProfile = (req, res, next) => {
 const updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
 
-  User.findByIdAndUpdate(req.user._id, { avatar }, { runValidators: true })
+  User.findByIdAndUpdate(req.user._id, { avatar }, { runValidators: true, new: true })
     .then((user) => {
       if (!user) {
         return next(new NotFound('Пользователь не найден'));
@@ -112,7 +112,7 @@ const login = (req, res, next) => {
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
-      res.send(token);
+      res.send({ token });
     })
     .catch(() => next(new AuthError('Неверные почта или пароль')));
 };
