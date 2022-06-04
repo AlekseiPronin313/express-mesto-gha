@@ -26,7 +26,7 @@ app.use(auth);
 app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
-app.all('/', (req, res, next) => {
+app.all('*', (req, res, next) => {
   next(new NotFoundError('Страница с таким url не найдена'));
 });
 

@@ -19,16 +19,16 @@ const createCard = (req, res, next) => {
     .then((card) => res.status(200).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new BadRequest('Переданы некорректные данные');
+        return next(new BadRequest('Переданы некорректные данные'));
       }
-    })
-    .catch(next);
+      return next(err);
+    });
 };
 
 const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
 
-  return Cards.findByIdAndRemove(cardId)
+  return Cards.findById(cardId)
     .orFail(() => {
       throw new NotFound('Карточка не найдена');
     })
