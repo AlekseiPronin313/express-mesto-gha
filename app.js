@@ -9,7 +9,6 @@ const {
 const auth = require('./middlewares/auth');
 const handelError = require('./middlewares/handelError');
 const NotFoundError = require('./errors/NotFoundError');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -20,7 +19,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 const app = express();
 app.use(express.json());
 
-app.use(requestLogger);
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateUser, createUser);
 
@@ -32,7 +30,6 @@ app.all('*', (req, res, next) => {
   next(new NotFoundError('Страница с таким url не найдена'));
 });
 
-app.use(errorLogger);
 app.use(errors());
 app.use(handelError);
 
