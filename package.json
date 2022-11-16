@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Aleksey313/express-mesto-gha.git"
+    "url": "git+https://alekseipronin313.github.io/express-mesto-gha/.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Aleksey313/express-mesto-gha/issues"
+    "url": "https://alekseipronin313.github.io/express-mesto-gha/issues"
   },
-  "homepage": "https://github.com/Aleksey313/express-mesto-gha#readme",
+  "homepage": "https://alekseipronin313.github.io/express-mesto-gha#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.1",
